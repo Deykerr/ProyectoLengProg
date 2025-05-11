@@ -1,3 +1,5 @@
+concesionaria\controller\VentaController.class
+concesionaria\controller\ProveedorController.class
 concesionaria\dao\UsuarioDAO.class
 concesionaria\dao\ClienteDAO.class
 concesionaria\entity\Proveedor.class
@@ -7,11 +9,15 @@ concesionaria\dao\VehiculoDAO.class
 concesionaria\database\Prueba.class
 concesionaria\entity\Inventario.class
 pe\edu\elp\concesionaria\JakartaRestConfiguration.class
+concesionaria\controller\ClienteController.class
 concesionaria\dao\VentaDAO.class
 concesionaria\database\ConexionBD.class
+concesionaria\controller\VehiculoController.class
 concesionaria\entity\Usuario.class
 concesionaria\logic\UsuarioLogic.class
 concesionaria\dao\InventarioDAO.class
+concesionaria\controller\InventarioController.class
 concesionaria\entity\Vehiculo.class
+concesionaria\controller\UsuarioController.class
 concesionaria\entity\Cliente.class
 pe\edu\elp\concesionaria\resources\JakartaEE10Resource.class

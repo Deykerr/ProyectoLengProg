@@ -29,7 +29,7 @@ public class ConexionBD {
     public ConexionBD(String usuario, String clave, String baseDatos, String puerto, String host) {
         this.usuario = "root";
         this.clave = "";
-        this.baseDatos = "ventas_vehiculos";
+        this.baseDatos = "venta_vehiculos_bd";
         this.puerto = "3306";
         this.host = "localhost";
         this.driver = "mysql";  // Driver para MySQL
@@ -75,7 +75,7 @@ public class ConexionBD {
 
     // Método principal para realizar pruebas (opcional)
     public static void main(String[] args) {
-        ConexionBD conexionBD = new ConexionBD("root", "root", "ventas_vehiculos", "3306", "localhost");
+        ConexionBD conexionBD = new ConexionBD("root", "root", "venta_vehiculos_bd", "3306", "localhost");
         // Puedes usar la conexión aquí para probar consultas
         conexionBD.cerrarConexion();
     }

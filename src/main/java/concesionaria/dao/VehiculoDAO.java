@@ -16,7 +16,7 @@ public class VehiculoDAO {
 public boolean registrar(Vehiculo vehiculo) {
     boolean resultado = false;
     try {
-        String sql = "INSERT INTO carros(modelo, marca, precio, anio) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO vehiculos(modelo, marca, precio, anio) VALUES (?, ?, ?, ?)";
         ConexionBD cnx = new ConexionBD(sql, sql, sql, sql, sql);
         Connection bd = cnx.getConexion();
         PreparedStatement stmt = bd.prepareStatement(sql);
