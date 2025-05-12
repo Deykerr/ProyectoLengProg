@@ -1,18 +1,23 @@
 package concesionaria.database;
 
 import concesionaria.dao.ClienteDAO;
+import concesionaria.dao.InventarioDAO;
 import concesionaria.dao.ProveedorDAO;
 import concesionaria.dao.UsuarioDAO;
 import concesionaria.dao.VehiculoDAO;
+import concesionaria.dao.VentaDAO;
 import concesionaria.entity.Cliente;
+import concesionaria.entity.Inventario;
 import concesionaria.entity.Proveedor;
 import concesionaria.entity.Usuario;
 import concesionaria.entity.Vehiculo;
+import concesionaria.entity.Venta;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class Prueba {
 
     public static void main(String[] args) {
-
         /*//Registrar Usuario
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario oUsuario = new Usuario();
@@ -25,8 +30,7 @@ public class Prueba {
         } else {
             System.out.println("No se pudo registrar");
         }*/
-
-        /*//Registrar cliente
+ /*//Registrar cliente
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente oCliente = new Cliente();
         oCliente.setNombre("Carlos");
@@ -41,8 +45,7 @@ public class Prueba {
         } else {
             System.out.println("No se pudo registrar el cliente");
         }*/
-
-        /*//Registrar proveedor
+ /*//Registrar proveedor
         ProveedorDAO proveedorDAO = new ProveedorDAO();
         Proveedor oProveedor = new Proveedor();
         oProveedor.setNombre("Distribuidora San Pedro");
@@ -56,8 +59,7 @@ public class Prueba {
         } else {
             System.out.println("No se pudo registrar el proveedor");
         }*/
-
-        /*
+ /*
         //Registrar vehiculo
         VehiculoDAO vehiculoDAO = new VehiculoDAO();
         Vehiculo oVehiculo = new Vehiculo();
@@ -73,7 +75,46 @@ public class Prueba {
             System.out.println("No se pudo registrar el vehículo");
         }*/
 
- /*//Actualizar Usuario
+ /*//Registro de nuevo inventario
+
+        InventarioDAO inventarioDAO = new InventarioDAO();
+        Inventario oInventario = new Inventario();
+
+        oInventario.setIdVehiculo(1);       // ID existente en la tabla vehículos
+        oInventario.setIdProveedor(1);      // ID existente en la tabla proveedores
+
+        oInventario.setFechaAdquisicion(LocalDate.of(2025, 5, 11));  // Usando LocalDate
+        oInventario.setCosto(new BigDecimal("15000.00"));           // Usando BigDecimal
+        oInventario.setCantidad(3);         // Unidades adquiridas
+
+        boolean registrado = inventarioDAO.registrar(oInventario);
+        if (registrado) {
+            System.out.println("Se registró correctamente el inventario");
+        } else {
+            System.out.println("No se pudo registrar el inventario");
+        }*/
+ /*
+        //Registrar Ventas
+        VentaDAO ventaDAO = new VentaDAO();
+        Venta oVenta = new Venta();
+
+//  estos ID ya existen en la base de datos
+        oVenta.setIdCliente(1);
+        oVenta.setIdVehiculo(1);
+
+        oVenta.setFechaVenta(LocalDate.of(2024, 5, 11)); // Fecha de la venta
+        oVenta.setMetodoPago("Tarjeta");                 // Método de pago: efectivo, tarjeta, etc.
+        oVenta.setPrecioVenta(new BigDecimal("18500.00")); // Precio de venta
+
+        boolean registrado = ventaDAO.registrar(oVenta);
+        if (registrado) {
+            System.out.println("Venta registrada correctamente");
+        } else {
+            System.out.println("No se pudo registrar la venta");
+        }*/
+
+
+        /*//Actualizar Usuario
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario oUsuario = new Usuario();
         oUsuario.setUsername("Manuel Garcia");

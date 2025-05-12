@@ -15,13 +15,13 @@ public class VentaDAO {
     public boolean registrar(Venta venta) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO ventas(id_cliente, id_carro, fecha_venta, metodo_pago, precio_venta) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO ventas(id_cliente, id_vehiculo, fecha_venta, metodo_pago, precio_venta) VALUES (?, ?, ?, ?, ?)";
             ConexionBD cnx = new ConexionBD(sql, sql, sql, sql, sql);
             Connection bd = cnx.getConexion();
             PreparedStatement stmt = bd.prepareStatement(sql);
             stmt.setInt(1, venta.getIdCliente());
             stmt.setInt(2, venta.getIdVehiculo());
-            stmt.setDate(3, Date.valueOf(venta.getFechaVenta())); // java.time.LocalDate
+            stmt.setDate(3, java.sql.Date.valueOf(venta.getFechaVenta())); // java.time.LocalDate
             stmt.setString(4, venta.getMetodoPago());
             stmt.setBigDecimal(5, venta.getPrecioVenta());
             resultado = stmt.executeUpdate() > 0;

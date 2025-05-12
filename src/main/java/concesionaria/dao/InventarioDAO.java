@@ -13,13 +13,13 @@ public class InventarioDAO {
 public boolean registrar(Inventario inv) {
     boolean resultado = false;
     try {
-        String sql = "INSERT INTO inventario(id_carro, id_proveedor, fecha_adquisicion, costo, cantidad) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO inventario(id_vehiculo, id_proveedor, fecha_adquisicion, costo, cantidad) VALUES (?, ?, ?, ?, ?)";
         ConexionBD cnx = new ConexionBD(sql, sql, sql, sql, sql);
         Connection bd = cnx.getConexion();
         PreparedStatement stmt = bd.prepareStatement(sql);
         stmt.setInt(1, inv.getIdVehiculo());
         stmt.setInt(2, inv.getIdProveedor());
-        stmt.setDate(3, Date.valueOf(inv.getFechaAdquisicion())); // LocalDate
+        stmt.setDate(3, java.sql.Date.valueOf(inv.getFechaAdquisicion())); // LocalDate
         stmt.setBigDecimal(4, inv.getCosto());
         stmt.setInt(5, inv.getCantidad());
         resultado = stmt.executeUpdate() > 0;
