@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -53,28 +54,29 @@ public class UsuarioController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = request.getPathInfo();
-        System.out.println(url);
-
-        if (url == null || url.equals("/")) {
-            // Cargar la vista principal del módulo de usuario
-            System.out.println("Cargar pantalla inicial del módulo de usuario");
+        HttpSession session = request.getSession();
+        if (session.getAttribute("usuario") == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
         } else {
-            String[] url_en_partes = url.split("/");
-            String accion = url_en_partes[1];
-            switch (accion) {
-                case "buscar":
-                    System.out.println("Realizar búsqueda en la base de datos");
-                    break;
-                case "crear":
-                    System.out.println("Cargar formulario de creación de usuario");
-                    break;
-                case "editar":
-                    Integer id = Integer.parseInt(url_en_partes[2]);
-                    System.out.println("Cargar formulario de edición del usuario con el ID " + id);
-                    break;
-                default:
-                    System.out.println("Acción no reconocida");
+            String url = request.getPathInfo();
+            if (url == null || url.equals("/")) {
+                System.out.println("Cargar vista principal");
+            } else {
+                String[] partes = url.split("/");
+                switch (partes[1]) {
+                    case "buscar":
+                        System.out.println("Buscar usuario en BD");
+                        break;
+                    case "crear":
+                        System.out.println("Formulario de creación");
+                        break;
+                    case "editar":
+                        int id = Integer.parseInt(partes[2]);
+                        System.out.println("Editar usuario ID " + id);
+                        break;
+                    default:
+                        System.out.println("Acción no reconocida");
+                }
             }
         }
     }

@@ -1,4 +1,3 @@
-
 package concesionaria.dao;
 
 /**
@@ -16,13 +15,14 @@ public class UsuarioDAO {
     public boolean registrar(Usuario oUsuario) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO usuarios(username, password_hash, rol) VALUES(?, ?, ?)";
+            //generar consulta 
+            String sql = "INSERT INTO usuario(nombre_completo,email,password)" + "VALUES(?,?,?)"; //conectarnos
             ConexionBD cnx = new ConexionBD(sql, sql, sql, sql, sql);
             Connection bd = cnx.getConexion();
             PreparedStatement prepararSql = bd.prepareStatement(sql);
-            prepararSql.setString(1, oUsuario.getUsername());
-            prepararSql.setString(2, oUsuario.getPassword());
-            prepararSql.setString(3, oUsuario.getRol());
+            prepararSql.setString(1, oUsuario.getNombre_completo());
+            prepararSql.setString(2, oUsuario.getEmail());
+            prepararSql.setString(3, oUsuario.getPassword());
             Integer filasAfectadas = prepararSql.executeUpdate();
             if (filasAfectadas > 0) {
                 resultado = true;
@@ -34,18 +34,19 @@ public class UsuarioDAO {
         return resultado;
     }
 
-    // Método para actualizar un usuario
+    //Metodo para actualizar usuario 
     public boolean actualizar(Usuario oUsuario) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE usuarios SET username=?, password_hash=?, rol=? WHERE id_usuario=?";
+            String sql = "UPDATE usuario SET nombre_completo=?,email=?,password=? WHERE id=?";
             ConexionBD cnx = new ConexionBD(sql, sql, sql, sql, sql);
             Connection bd = cnx.getConexion();
-            PreparedStatement prepararSQL = bd.prepareStatement(sql);
-            prepararSQL.setString(1, oUsuario.getUsername());
-            prepararSQL.setString(2, oUsuario.getPassword());
-            prepararSQL.setString(3, oUsuario.getRol());
-            prepararSQL.setInt(4, oUsuario.getIdUsuario());
+
+            PreparedStatement prepararSQL = bd.prepareCall(sql);
+            prepararSQL.setString(1, oUsuario.getNombre_completo());
+            prepararSQL.setString(2, oUsuario.getEmail());
+            prepararSQL.setString(3, oUsuario.getPassword());
+            prepararSQL.setInt(4, oUsuario.getId());
             Integer filasAfectadas = prepararSQL.executeUpdate();
             if (filasAfectadas > 0) {
                 resultado = true;
@@ -61,11 +62,11 @@ public class UsuarioDAO {
     public boolean eliminar(Usuario oUsuario) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM usuarios WHERE id_usuario=?";
+            String sql = "DELETE FROM usuario WHERE id=?";
             ConexionBD cnx = new ConexionBD(sql, sql, sql, sql, sql);
             Connection bd = cnx.getConexion();
             PreparedStatement prepararSQL = bd.prepareStatement(sql);
-            prepararSQL.setInt(1, oUsuario.getIdUsuario());
+            prepararSQL.setInt(1, oUsuario.getId());
             Integer filasAfectadas = prepararSQL.executeUpdate();
             if (filasAfectadas > 0) {
                 resultado = true;
@@ -81,8 +82,8 @@ public class UsuarioDAO {
     public ArrayList<Usuario> listar(String busqueda) {
         ArrayList<Usuario> lista = new ArrayList<>();
         try {
-            String sql = "SELECT id_usuario, username, password_hash, rol FROM usuarios WHERE username LIKE ? OR rol LIKE ?";
-            ConexionBD cnx = new ConexionBD(sql, sql, busqueda, sql, sql);
+            String sql = "SELECT id,nombre_completo,email,password FROM usuario WHERE nombre_completo LIKE ?" + " OR email=?";
+            ConexionBD cnx = new ConexionBD(sql, sql, sql, sql, sql);
             Connection db = cnx.getConexion();
             PreparedStatement prepararSQL = db.prepareStatement(sql);
             prepararSQL.setString(1, "%" + busqueda + "%");
@@ -90,14 +91,14 @@ public class UsuarioDAO {
             ResultSet resultado = prepararSQL.executeQuery();
             while (resultado.next()) {
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario(resultado.getInt("id_usuario"));
-                usuario.setUsername(resultado.getString("username"));
-                usuario.setPassword(resultado.getString("password_hash"));
-                usuario.setRol(resultado.getString("rol"));
+                usuario.setId(resultado.getInt("id"));
+                usuario.setNombre_completo(resultado.getString("nombre_completo"));
+                usuario.setPassword(resultado.getString("password"));
+                usuario.setEmail(resultado.getString("email"));
                 lista.add(usuario);
             }
-        } catch (SQLException e) {
-            System.out.println("Error al listar usuarios");
+        } catch (Exception e) {
+            System.out.println("Error al listar");
             System.out.println(e.getMessage());
         }
         return lista;
@@ -107,7 +108,7 @@ public class UsuarioDAO {
     public Usuario obtener(int id) {
         Usuario registro = null;
         try {
-            String sql = "SELECT id_usuario, username, password_hash, rol FROM usuarios WHERE id_usuario=?";
+            String sql = "SELECT id, nombre_completo, email, password FROM usuario WHERE id=?";
             ConexionBD cnx = new ConexionBD(sql, sql, sql, sql, sql);
             Connection bd = cnx.getConexion();
             PreparedStatement prepararSQL = bd.prepareStatement(sql);
@@ -115,16 +116,41 @@ public class UsuarioDAO {
             ResultSet resultado = prepararSQL.executeQuery();
             while (resultado.next()) {
                 registro = new Usuario();
-                registro.setIdUsuario(resultado.getInt("id_usuario"));
-                registro.setUsername(resultado.getString("username"));
-                registro.setPassword(resultado.getString("password_hash"));
-                registro.setRol(resultado.getString("rol"));
+                registro.setId(resultado.getInt("id"));
+                registro.setNombre_completo(resultado.getString("nombre_completo"));
+                registro.setEmail(resultado.getString("email"));
+                registro.setPassword(resultado.getString("password"));
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener usuario");
             System.out.println(e.getMessage());
         }
         return registro;
+        //usuaruio login
+    }
+
+    public Usuario login(String email) {
+        Usuario registro = null;
+        try {
+            String sql = "SELECT id, nombre_completo, email, password FROM usuario WHERE LOWER(email)=LOWER(?)";
+            ConexionBD cnx = new ConexionBD(sql, sql, sql, sql, sql);
+            Connection bd = cnx.getConexion();
+            PreparedStatement prepararSQL = bd.prepareStatement(sql);
+            System.out.println("Email recibido para login: " + email); // Depuración
+            prepararSQL.setString(1, email);
+            ResultSet resultado = prepararSQL.executeQuery();
+            while (resultado.next()) {
+                registro = new Usuario();
+                registro.setId(resultado.getInt("id"));
+                registro.setNombre_completo(resultado.getString("nombre_completo"));
+                registro.setEmail(resultado.getString("email"));
+                registro.setPassword(resultado.getString("password"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener usuario");
+            System.out.println(e.getMessage());
+            e.printStackTrace(); // 
+        }
+        return registro;
     }
 }
-

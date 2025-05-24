@@ -4,11 +4,11 @@ concesionaria\dao\UsuarioDAO.class
 concesionaria\dao\ClienteDAO.class
 concesionaria\entity\Proveedor.class
 concesionaria\entity\Venta.class
+concesionaria\controller\LoginController.class
 concesionaria\dao\ProveedorDAO.class
 concesionaria\dao\VehiculoDAO.class
 concesionaria\database\Prueba.class
 concesionaria\entity\Inventario.class
-pe\edu\elp\concesionaria\JakartaRestConfiguration.class
 concesionaria\controller\ClienteController.class
 concesionaria\dao\VentaDAO.class
 concesionaria\database\ConexionBD.class
@@ -19,5 +19,5 @@ concesionaria\dao\InventarioDAO.class
 concesionaria\controller\InventarioController.class
 concesionaria\entity\Vehiculo.class
 concesionaria\controller\UsuarioController.class
+concesionaria\controller\AdminController.class
 concesionaria\entity\Cliente.class
-pe\edu\elp\concesionaria\resources\JakartaEE10Resource.class

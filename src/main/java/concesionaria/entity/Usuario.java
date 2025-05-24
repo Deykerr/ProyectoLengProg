@@ -10,28 +10,36 @@ package concesionaria.entity;
  */
 public class Usuario {
 
-    private Integer idUsuario;
-    private String username;
+    private Integer id;
+    private String nombre_completo;
+    private String email;
     private String password;
-    private String rol;
 
     public Usuario() {
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNombre_completo() {
+        return nombre_completo;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNombre_completo(String nombre_completo) {
+        this.nombre_completo = nombre_completo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -42,12 +50,9 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getRol() {
-        return rol;
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", nombre_completo=" + nombre_completo + ", email=" + email + ", password=" + password + '}';
     }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
+ 
 }

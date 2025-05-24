@@ -12,25 +12,65 @@ import concesionaria.entity.Proveedor;
 import concesionaria.entity.Usuario;
 import concesionaria.entity.Vehiculo;
 import concesionaria.entity.Venta;
+import concesionaria.logic.UsuarioLogic;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Prueba {
 
     public static void main(String[] args) {
-        /*//Registrar Usuario
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        
+        UsuarioDAO dao = new UsuarioDAO();
+
+        // --- Prueba 1: Usuario Existente ---
+        String emailExistente = "deyker2@elp"; // Asegúrate de que este email exista en tu BD
+        System.out.println("\n--- Probando con un usuario existente ---");
+        Usuario usuarioEncontrado = dao.login(emailExistente);
+
+        if (usuarioEncontrado != null) {
+            System.out.println("¡Login exitoso!");
+            System.out.println("Detalles del usuario: " + usuarioEncontrado.toString());
+        } else {
+            System.out.println("Login fallido para: " + emailExistente + ". Usuario no encontrado.");
+        }
+
+        // --- Prueba 2: Usuario No Existente ---
+        String emailNoExistente = "noexiste@example.com";
+        System.out.println("\n--- Probando con un usuario NO existente ---");
+        Usuario usuarioNoEncontrado = dao.login(emailNoExistente);
+
+        if (usuarioNoEncontrado != null) {
+            System.out.println("¡Login exitoso (INESPERADO)!");
+            System.out.println("Detalles del usuario: " + usuarioNoEncontrado.toString());
+        } else {
+            System.out.println("Login fallido para: " + emailNoExistente + ". Usuario no encontrado (ESPERADO).");
+        }
+
+        // --- Prueba 3: Email con mayúsculas/minúsculas ---
+        String emailMixto = "deyKer2@elp"; // Un email existente pero con mayúsculas/minúsculas
+        System.out.println("\n--- Probando con email en mayúsculas/minúsculas ---");
+        Usuario usuarioMixto = dao.login(emailMixto);
+
+        if (usuarioMixto != null) {
+            System.out.println("¡Login exitoso con email mixto!");
+            System.out.println("Detalles del usuario: " + usuarioMixto.toString());
+        } else {
+            System.out.println("Login fallido para: " + emailMixto + ". Usuario no encontrado.");
+        }
+        
+       /*//Registrar Usuario
+        UsuarioLogic oUusuarioLogic = new UsuarioLogic();
         Usuario oUsuario = new Usuario();
-        oUsuario.setUsername("Jhon@elp.edu");
+        oUsuario.setNombre_completo("deyker2");
+        oUsuario.setEmail("deyker2@elp");
         oUsuario.setPassword("12345");
-        oUsuario.setRol("vendedor");
-        boolean registrado = usuarioDAO.registrar(oUsuario);
+        boolean registrado = oUusuarioLogic.registrar(oUsuario);
         if (registrado) {
             System.out.println("Se registro correctamente");
         } else {
             System.out.println("No se pudo registrar");
         }*/
- /*//Registrar cliente
+ /*//Registrarcliente
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente oCliente = new Cliente();
         oCliente.setNombre("Carlos");
@@ -113,25 +153,25 @@ public class Prueba {
             System.out.println("No se pudo registrar la venta");
         }*/
 
-
-        /*//Actualizar Usuario
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+/*
+        //Actualizar Usuario
+        UsuarioLogic usuarioLogic = new UsuarioLogic();
         Usuario oUsuario = new Usuario();
-        oUsuario.setUsername("Manuel Garcia");
-        oUsuario.setPassword("1111");
-        oUsuario.setRol("gerente");
-        oUsuario.setId(1);
-        boolean actualizado = usuarioDAO.actualizar(oUsuario);
+        oUsuario.setNombre_completo("Cristian");
+        oUsuario.setEmail("dani@elp");
+        oUsuario.setPassword("12345");
+        oUsuario.setId(3);
+        boolean actualizado = usuarioLogic.actualizar(oUsuario);
         if (actualizado) {
             System.out.println("Actualizado correctamente");
         } else {
             System.out.println("Error al actualizar");
         }*/
- /*//Eliminar Usuario
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+       /* //Eliminar Usuario
+        UsuarioLogic usuarioLogic = new UsuarioLogic();
         Usuario oUsuario = new Usuario();
-        oUsuario.setId(1);
-        boolean eliminado = usuarioDAO.eliminar(oUsuario);
+        oUsuario.setId(2);
+        boolean eliminado = usuarioLogic.eliminar(oUsuario);
         if (eliminado) {
             System.out.println("Eliminado correctamente");
         } else {

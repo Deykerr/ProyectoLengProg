@@ -28,7 +28,7 @@ public class ConexionBD {
     // Constructor con parámetros
     public ConexionBD(String usuario, String clave, String baseDatos, String puerto, String host) {
         this.usuario = "root";
-        this.clave = "";
+        this.clave = "1234";
         this.baseDatos = "venta_vehiculos_bd";
         this.puerto = "3306";
         this.host = "localhost";

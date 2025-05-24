@@ -1,16 +1,16 @@
-
 package concesionaria.logic;
 
 import concesionaria.dao.UsuarioDAO;
 import concesionaria.entity.Usuario;
 import java.util.ArrayList;
 import org.jasypt.util.password.StrongPasswordEncryptor;
+
 /**
  *
  * @author Lenovo
  */
 public class UsuarioLogic {
-    
+
     // Registrar usuario
     public boolean registrar(Usuario oUsuario) {
         String passwordSinEncriptar = oUsuario.getPassword();
@@ -44,8 +44,15 @@ public class UsuarioLogic {
     }
     // Obtener usuario por ID
 
-    public Usuario obtener(Integer id) {
+    public Usuario obtener(Integer idUsuario) {
         UsuarioDAO oUsuarioDAO = new UsuarioDAO();
-        return oUsuarioDAO.obtener(id);
+        return oUsuarioDAO.obtener(idUsuario);
     }
+
+    //metodo logig en Usuario
+    public Usuario login(String email) {
+        UsuarioDAO oUsuarioDAO = new UsuarioDAO();
+        return oUsuarioDAO.login(email);
+    }
+
 }
