@@ -20,7 +20,7 @@ public class Prueba {
 
     public static void main(String[] args) {
         
-        UsuarioDAO dao = new UsuarioDAO();
+       /* UsuarioDAO dao = new UsuarioDAO();
 
         // --- Prueba 1: Usuario Existente ---
         String emailExistente = "deyker2@elp"; // Asegúrate de que este email exista en tu BD
@@ -57,11 +57,11 @@ public class Prueba {
         } else {
             System.out.println("Login fallido para: " + emailMixto + ". Usuario no encontrado.");
         }
-        
-       /*//Registrar Usuario
+        */
+       //Registrar Usuario
         UsuarioLogic oUusuarioLogic = new UsuarioLogic();
         Usuario oUsuario = new Usuario();
-        oUsuario.setNombre_completo("deyker2");
+        oUsuario.setNombre_completo("deyker");
         oUsuario.setEmail("deyker2@elp");
         oUsuario.setPassword("12345");
         boolean registrado = oUusuarioLogic.registrar(oUsuario);
@@ -69,7 +69,7 @@ public class Prueba {
             System.out.println("Se registro correctamente");
         } else {
             System.out.println("No se pudo registrar");
-        }*/
+        }
  /*//Registrarcliente
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente oCliente = new Cliente();
