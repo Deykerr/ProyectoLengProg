@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package concesionaria.controller;
 
 import java.io.IOException;
@@ -43,63 +47,50 @@ public class UsuarioController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+    /*
+        
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("usuario") == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
+        /*
+            doGet GET /admin/usuario/            -> cargar la vista principal del modulo de usuario
+            doGet GET /admin/usuario/buscar      -> Realizar busqueda en la BD
+            doGet GET /admin/usuario/crear       -> Cargar el formulario de creacion de usuario
+            doGet GET /admin/usuario/editar/1005 ->cargar el formulario de edicion con los datos actuales
+         */
+                
+        String url = request.getPathInfo();
+        System.out.println(url);
+        if (url == null || url.equals("/")) {
+            //cargar la vista principal del modulo de usuario
+            System.out.println("cargar pantalla inicial modulo de usuario");
         } else {
-            String url = request.getPathInfo();
-            if (url == null || url.equals("/")) {
-                System.out.println("Cargar vista principal");
-            } else {
-                String[] partes = url.split("/");
-                switch (partes[1]) {
-                    case "buscar":
-                        System.out.println("Buscar usuario en BD");
-                        break;
-                    case "crear":
-                        System.out.println("Formulario de creación");
-                        break;
-                    case "editar":
-                        int id = Integer.parseInt(partes[2]);
-                        System.out.println("Editar usuario ID " + id);
-                        break;
-                    default:
-                        System.out.println("Acción no reconocida");
-                }
+            String[] url_en_partes = url.split("/");
+            String accion = url_en_partes[1];
+            switch (accion) {
+                case "buscar":
+                    System.out.println("Realizar busqueda en la base de datos");
+                    break;
+                case "crear":
+                    System.out.println("Cargar formulario de creacion de usuario");
+                    break;
+                case "editar":
+                    Integer id=Integer.parseInt(url_en_partes[2]);
+                    System.out.println("Cargar formulario de edicion del usuario con el ID "+url_en_partes);
+                    break;
+                default:
+                    System.out.println("No existe la acción requerida");
             }
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -49,10 +49,14 @@ public class UsuarioLogic {
         return oUsuarioDAO.obtener(idUsuario);
     }
 
-    //metodo logig en Usuario
+    /*//metodo logig en Usuario
     public Usuario login(String email) {
         UsuarioDAO oUsuarioDAO = new UsuarioDAO();
         return oUsuarioDAO.login(email);
-    }
+    }*/
 
+    public Usuario verificarEmail(String email) {
+        UsuarioDAO oUsuarioDAO = new UsuarioDAO();
+        return oUsuarioDAO.verificarEmail(email);
+    }
 }

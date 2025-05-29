@@ -129,7 +129,7 @@ public class UsuarioDAO {
         //usuaruio login
     }
 
-    public Usuario login(String email) {
+    /*public Usuario login(String email) {
         Usuario registro = null;
         try {
             String sql = "SELECT id, nombre_completo, email, password FROM usuario WHERE LOWER(email)=LOWER(?)";
@@ -150,6 +150,31 @@ public class UsuarioDAO {
             System.out.println("Error al obtener usuario");
             System.out.println(e.getMessage());
             e.printStackTrace(); // 
+        }
+        return registro;
+    }*/
+    public Usuario verificarEmail(String email) {
+        Usuario registro = null;
+        try {
+            String sql = "SELECT id,nombre_completo,email,password "
+                    + "FROM usuario WHERE email=?";
+            ConexionBD cnx = new ConexionBD(sql, sql, sql, sql, sql);
+            Connection bd = cnx.getConexion();
+            PreparedStatement prepararSQL = bd.prepareStatement(sql);
+            prepararSQL.setString(1, email);
+            ResultSet resultado = prepararSQL.executeQuery();
+            //nos devuelve 0 o al menos 1
+            while (resultado.next()) {
+                registro = new Usuario();
+                registro.setId(resultado.getInt("id"));
+                registro.setNombre_completo(resultado.getString("nombre_completo"));
+                registro.setEmail(resultado.getString("email"));
+                registro.setPassword(resultado.getString("password"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al obtener usuario");
+            System.out.println(e.getMessage());
         }
         return registro;
     }
