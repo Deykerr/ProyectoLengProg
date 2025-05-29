@@ -1,3 +1,12 @@
-/target/
-*.class
-*.war
+# Ignorar la carpeta de compilación de Maven
+target/
+
+# Otros elementos comunes a ignorar en proyectos Java/Maven
+*.iml                 # IntelliJ IDEA files
+.idea/                # IntelliJ IDEA project directory
+.DS_Store             # macOS system files
+.classpath
+.project
+.settings/
+*.log
+*.swp
